@@ -26,7 +26,8 @@ class Viewer(object):
         self.x0, self.x1, self.y0, self.y1 = x0, x1, y0, y1
         self.size = size
         self.zoom = zoom
-        self.figure, self.ax = plt.subplots()
+        w, h = matplotlib.figure.figaspect(1.)
+        self.figure, self.ax = plt.subplots(figsize=(w, h))
         self.figure.canvas.mpl_connect("scroll_event", self.onscroll)
         self.figure.canvas.mpl_connect('key_press_event', self.onkey)
 
@@ -71,6 +72,7 @@ class Viewer(object):
                        norm=matplotlib.colors.PowerNorm(0.2))
         self.ax.set_xticks([])
         self.ax.set_yticks([])
+        self.figure.tight_layout(pad=0)
         self.figure.show()
 
 
